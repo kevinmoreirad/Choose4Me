@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Choose4Me</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css?v=1" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css?v=3" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top" onload="getSurveyList()">
+    <!-- Navigation -->
+    <a class="menu-toggle rounded" href="#">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+          <a class="js-scroll-trigger" href="#page-top"><img src="img/logoMenu.PNG" class="logoMenu">Choose4Me</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="js-scroll-trigger" href="#addQuestion">Add question</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="js-scroll-trigger" href="#answerQuestion">Answer question</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#questionsTable">Statistics</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="index.html">Disconnect</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="mastheadUserPage">
+      <div class="text-center logoUserInterface">
+        <img src="img/logo.PNG" class="logoHome">
+        <h3 class="logoText">Choose4Me</h3>
+      </div>
+    </header>
+    <section class="content-section bg-light" id="addQuestion">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+              <div class="container">
+                  <div class="text-center centerPageUser">
+                      <h2  class="mb-4" style="color: #343a40;">ADD NEW QUESTION</h2>  
+                      <div class="form-group inputQuestion">
+                        <textarea class="form-control"  onfocus="clearContents(this);" placeholder="Write your question here..." id="questionText"type="text"></textarea>
+                    </div> 
+                      <div class="container text-center dropZones">
+                          <div class="row"> 
+                            <div class="col-md-6" style="float:right; width: 400px;">
+                                <h3 style="color: #343a40;">Proposition one</h3>
+                              <div id="prop1" class="prop">
+                              <form method="post" action="" id="imgProposition1">   
+                                   <div class="form-group files drop_zone" >
+                                     <input type="file"  id="in1" onchange="checkFileExtension(this, imgProposition1)" class="form-control" multiple="">
+                                   </div>
+                               </form>
+                              </div>
+                               <div class="form-group inputResponse">
+                                   <input class="form-control" id="responseText1" onfocus="clearContents(this);" placeholder="Enter a Text..." type="text">
+                               </div>   
+                         </div>
+                             <div class="col-md-6"  style="float:left;  width: 400px;">
+                                <h3 style="color: #343a40;">Proposition two</h3>
+                               <div id="prop2" class="prop">
+                                 <form method="post" action="#" id="imgProposition2">   
+                                      <div class="form-group files drop_zone">
+                                        <input type="file" id="in2" onchange="checkFileExtension(this, imgProposition2)" class="form-control" multiple="">
+                                      </div>
+                                  </form>
+                              </div>
+                              <div class="form-group inputResponse">
+                                  <input class="form-control" id="responseText2"  onfocus="clearContents(this);" placeholder="Enter a Text..." type="text">
+                              </div>   
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container text-center confirmQuestionBtn">
+                          <a onclick="postSurvey(questionText.value, isAtLeastResponseOrImg())" class="btn btn-xl btn-dark">Confirm Question!</a>
+                        </div>
+                    </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Call to Action -->
+    <section class="content-section bg-primary text-white" id="answerQuestion">
+      <div class="container text-center">
+        <h2 class="mb-4">Look at this Beautiful button down here, Click to answer some questions</h2>
+        <img src="img/finger.png">
+        <div>
+            <a id="myBtnRespondQuestion" class="btn btn-xl btn-light mr-4" style="margin-top: 20px; color:#343a40;" onclick="getNewQuestion()">I'm the button!</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section bg-light" id="questionsTable">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="container">
+                    <div class="row text-center">
+                    <h1 style="margin-bottom: 30px;">Table with your questions. Click to have vote's stats</h1>                    
+                        <div class="col-md-10 col-md-offset-1">
+                
+                            <div class="panel panel-default panel-table">
+                              <div class="panel-heading">
+                                <div class="row">
+                                  <div class="col col-xs-6">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="panel-body">
+                                <table class="table table-striped table-bordered table-list">
+                                  <thead>
+                                    <tr>
+                                        <th><em class="fa fa-cog"></em></th>
+                                        <th class="hidden-xs">ID</th>
+                                        <th>Question</th>
+                                    </tr> 
+                                  </thead>
+                                  <tbody id="surveyTable"></tbody>
+                                </table>                           
+                              </div>
+                            </div>
+                
+                </div></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+          <!-- The Modal response -->
+    <div id="myModalRespondQuestion" class="modal">
+      
+        <!-- Modal content --> 
+        <div class="modal-content">
+          <span class="close">&times;</span>
+              <div class="main-center row" id="modalQuestion">
+                <h2 id="responseText"></h2>
+                <div style="width: 100%; display: flex; flex-wrap: wrap;">
+                  <div style=" margin:auto;">
+                  <div class="img-background">
+                    <img class="img-square" src="" id="imageNewQuestion1">
+                  </div>
+                  <div>
+                      <p id="propText1" style="margin-top: 10px;"></p>
+                  </div>
+                  <div id="answer1Btn" style="margin-top: 30px; margin-bottom: 40px; text-align:center;">
+                      <a class="btn btn-dark btn-xl js-scroll-trigger" style="margin:auto;" onclick="confirmAnswer(1)">Answer 1</a>
+                  </div>                  
+                </div>
+                <div style=" margin:auto;">
+                  <div class="img-background">
+                    <img class="img-square" id="imageNewQuestion2" src="" style="margin: auto;">
+                  </div>
+                  <div>
+                      <p id="propText2" style="margin-top: 10px;"></p>
+                  </div>
+                  <div id="answer2Btn" style="margin-top: 30px; margin-bottom:40px; text-align:center">
+                      <a class="btn btn-dark btn-xl js-scroll-trigger"  style="margin:auto;"  onclick="confirmAnswer(2)">Answer 2</a>
+                  </div> 
+                </div>
+                </div>
+                              <!-- stats after answering the question-->
+              <div id="statsAfterAnswer">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-12">
+                            <hr>
+                            <h1 style="text-align: center; color: #1D809F; margin-top: 30px; margin-bottom: 15px;">Statistics</h1>
+                              <div style="display:table;"><h3 style="margin-left: 20px;">Number total votes</h3><div class="statsVotes" id="numberTotalVotes"> </div></div>
+                              <div style="display:table;"><h3 style="margin-left: 20px; margin-bottom: 20px;">City with most votes</h3><div class="statsVotes" id="cityMostVotes"></div></div>
+                              <h3 class="progress-title">Total</h3>
+                              <div class="progress">
+                                  <div id="totalPercentage" class="progress-bar" style=" background:#97c513;">
+                                      <div id="progressValueTotal" class="progress-value"></div>
+                                  </div>
+                              </div>
+                              
+                              <h3 class="progress-title">Women</h3>
+                              <div class="progress">
+                                  <div id="womenPercentage" class="progress-bar" style="background:#f2545b;">
+                                      <div id="progressValueWomen"class="progress-value">100%</div>
+                                  </div>
+                              </div>
+                              
+                              <h3 class="progress-title">Men</h3>
+                              <div class="progress">
+                                  <div id="menPercentage" class="progress-bar" style="background:#4286f4;">
+                                      <div id="progressValueMen" class="progress-value"></div>
+                                  </div>
+                              </div>
+                              
+                              <h3 class="progress-title">1 to 18 Years</h3>
+                              <div class="progress">
+                                  <div id="percentage1To18" class="progress-bar" style="background:#21ff63;">
+                                      <div id="progressValue1To18"class="progress-value">90%</div>
+                                  </div>
+                              </div>
+
+                              <h3 class="progress-title">19 to 35 Years</h3>
+                              <div class="progress">
+                                  <div id="percentage19To35" class="progress-bar" style="background:#97c513;">
+                                      <div id="progressValue19To35" class="progress-value"></div>
+                                  </div>
+                              </div>
+
+                              <h3 class="progress-title">36 to 55 Years</h3>
+                              <div class="progress">
+                                  <div id="percentage36To55" class="progress-bar" style="background:#f2545b;">
+                                      <div id="progressValue36To55"class="progress-value"></div>
+                                  </div>
+                              </div>
+
+                              <h3 class="progress-title">56 to 80 Years</h3>
+                              <div class="progress">
+                                  <div  id="percentage56To80" class="progress-bar" style=" background:#4286f4;">
+                                      <div id="progressValue56To80"class="progress-value"></div>
+                                  </div>
+                              </div>
+
+                              <h3 class="progress-title">81+ Years</h3>
+                              <div class="progress">
+                                  <div id="percentage80More" class="progress-bar" style=" background:#21ff63;">
+                                      <div id="progressValue80More" class="progress-value"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="container text-center confirmQuestionBtn">
+                    <a onclick="closeNewQuestion()" class="btn btn-xl btn-dark">Close</a>
+                  </div>
+              </div>
+        </div>
+      
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/apiCallController.js?v=20"></script> 
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/stylish-portfolio.min.js"></script>
+
+    <script src="js/userInterfaceController.js?v=1"></script>
+    <script src="js/userInterfaceModalController.js?v=2"></script>
+  </body>
+
+</html>
