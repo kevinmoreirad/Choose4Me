@@ -1,13 +1,48 @@
+
 # Routes
 # This file defines all application routes (Higher priority routes first)
-# ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+# Get the account with given username
+GET     /api/accounts/:username     controllers.AccountController.getAccount(username)
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(file)
+# Post a new account
+POST     /api/accounts     controllers.AccountController.postAccount()
+
+
+
+# Get list of surveys created by the user
+GET     /api/accounts/:username/surveys     controllers.SurveyController.getSurveys(username)
+
+# Get survey by id
+GET     /api/surveys/:id     controllers.SurveyController.getSurveyById(id)
+
+# Post new survey for this user
+POST     /api/accounts/:username/surveys     controllers.SurveyController.postSurvey(username)
+
+# Delete that survey (and the associated propositions, and answers about it)
+DELETE     /api/accounts/:username/surveys/:id     controllers.SurveyController.deleteSurvey(username, id)
+
+
+
+
+# Get list of surveyPropositions of given survey
+GET     /api/surveys/:id/surveyPropositions     controllers.SurveyPropositionController.getSurveyPropositions(id)
+
+# Post surveyProposition for given survey
+POST     /api/surveys/:id/surveyPropositions     controllers.SurveyPropositionController.postSurveyProposition(id)
+
+
+
+# Post answer from user username
+POST     /api/accounts/:username/answers    controllers.AnswerController.postAnswer(username)
+
+
+
+# Get list statistics for asked survey
+GET     /api/surveys/:id/stats     controllers.ApiController.getStats(id)
+
+# Get the token of account with given username
+GET     /api/token     controllers.ApiController.getToken(username: Option[String], password: Option[String])
+
+# Get a question that the user didn't have responded yet randomly
+GET     /api/accounts/:username/newquestion     controllers.ApiController.getNewQuestion(username)
